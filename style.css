@@ -1,0 +1,588 @@
+/* Genel Stil Ayarları */
+:root {
+    --background-dark: #1a1a1a;        /* Koyu Gri - Ana arka plan */
+    --text-light: #e0e0e0;             /* Açık Gri - Genel metin rengi */
+    --primary-accent: #00bcd4;         /* Turkuaz - Vurgu, ikonlar, ilerleme çubukları */
+    --secondary-text: #a0a0a0;         /* Orta Gri - Açıklama metinleri */
+    --card-background: #2a2a2a;        /* Daha açık koyu gri - Kart ve kutu arka planları */
+    --border-color: #3a3a3a;           /* Hafif kenarlık rengi */
+}
+
+/* Sıfırlamalar ve Temel Ayarlar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-light); /* Tüm metinler için açık gri */
+    background-color: var(--background-dark); /* Tüm arka plan için koyu gri */
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Yatay kaydırmayı engelle */
+    display: flex; /* Flexbox kullanarak ana içeriği ortala */
+    flex-direction: column;
+    min-height: 100vh; /* Minimum tam ekran yüksekliği */
+}
+
+/* Scrolling Background Container */
+.scrolling-background {
+    position: relative;
+    width: 100%;
+    height: 150px; /* Şerit yüksekliğini ayarlayın */
+    overflow: hidden;
+    display: flex; /* İçindeki görselleri yanyana sıralamak için */
+    align-items: center; /* Görselleri dikeyde ortala */
+    white-space: nowrap; /* Görsellerin tek satırda kalmasını sağla, satır atlamazlar */
+
+    /* Animasyon hızı. Yeni ikon sayısına göre güncellendi. */
+    animation: scrollBackground 90s linear infinite; /* 8 ikon * 4 set = 32 ikonluk bir döngü için uygun hız */
+
+    background-color: transparent;
+    border-bottom: none;
+    box-shadow: none;
+
+    pointer-events: none; /* Fare olaylarını engeller, altındaki içeriğe tıklanabilir */
+}
+
+.scrolling-bg-icon {
+    height: 100px; /* Görselin yüksekliği, şerit yüksekliğine göre ayarlayın */
+    width: auto;
+    flex-shrink: 0; /* Boyutlarını korumalarını ve küçülmemelerini sağlar */
+    margin: 0 40px; /* Görseller arasında boşluk */
+    /* Görsellerin daha pürüzsüz görünmesi için iyileştirmeler (isteğe bağlı) */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Keyframe Animation for Scrolling Background */
+@keyframes scrollBackground {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-25%); /* 4 set görsel için %25 kaydır */
+    }
+}
+
+
+/* Ana İçerik Kapsayıcısı */
+main {
+    flex-grow: 1; /* Ana içeriğin dikeyde yer kaplamasını sağla */
+    position: relative; /* İçeriğin diğer elementlerin üzerinde kalmasını sağlar */
+    z-index: 1; /* Arka plan görsellerinin üzerinde kalmasını sağlar. BU KRİTİK! */
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto; /* Sayfayı ortala */
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-light); /* Başlıklar için açık gri */
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 4.5em;
+    color: var(--text-light);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 3em;
+    text-align: center; /* Bölüm başlıklarını ortala */
+    padding-bottom: 20px;
+    position: relative;
+    margin-bottom: 60px;
+    color: var(--primary-accent); /* Bölüm başlıkları için turkuaz */
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background-color: var(--primary-accent);
+    border-radius: 2px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-accent);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--text-light);
+}
+
+/* Animasyonlar (JS tarafından tetiklenecek) */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero Section - İlk sayfa içeriği */
+.hero-section {
+    background: linear-gradient(135deg, rgba(0, 102, 153, 0.9), rgba(26, 26, 26, 0.9)), url('image_e0faf0.jpg') no-repeat center center/cover; /* Arka plan görseli yolu düzeltildi */
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Yatayda ortala */
+    align-items: center;      /* Dikeyde ortala */
+    text-align: center;      /* Metinleri ortala */
+    overflow: hidden;
+    position: relative; /* Z-index'in çalışması için position olması gerekli */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    z-index: 1; /* Hero section'ın diğer içeriğin üzerinde olmasını sağlar */
+}
+
+/* Hero Section İçindeki Animasyonlar */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.fade-in-up.delay-1 { animation-delay: 0.5s; }
+.fade-in-up.delay-2 { animation-delay: 1s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content {
+    max-width: 900px;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+}
+
+.profile-photo {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid var(--primary-accent);
+    margin-bottom: 30px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    animation: zoomIn 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.tagline {
+    font-size: 1.8em;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    color: var(--secondary-text);
+    font-weight: 400;
+}
+
+/* Main Navigation Menu */
+.main-nav {
+    margin-top: 40px;
+}
+
+.main-nav a {
+    color: var(--text-light);
+    margin: 0 25px;
+    font-size: 1.3em;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: background-color 0.4s ease, transform 0.4s ease, color 0.4s ease;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-accent);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-out;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    transform: translateX(0);
+}
+
+.main-nav a:hover {
+    color: var(--primary-accent);
+    transform: translateY(-5px);
+}
+
+/* Sections */
+.section {
+    padding: 100px 0; /* Bölümlere üst ve alt boşluk */
+    background-color: var(--background-dark);
+    border-bottom: 1px solid var(--border-color);
+    position: relative; /* İçerik için pozisyon ayarı */
+    z-index: 1; /* Section içeriğinin diğer elementlerin üzerinde olmasını sağlar */
+}
+
+.section:nth-child(even) {
+    background-color: var(--card-background);
+}
+
+/* Timeline (Education & Experience) */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--primary-accent);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+}
+
+.timeline-item {
+    padding: 25px;
+    position: relative;
+    background-color: var(--card-background);
+    width: 48%;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    /* Logoların ve metinlerin hizalaması için */
+    align-items: flex-start; /* Öğe içeriğini sola hizala */
+    text-align: left; /* Metinleri sola hizala */
+}
+
+.timeline-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-accent);
+    border: 4px solid var(--background-dark);
+    top: 30px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Positioning for left/right timeline items */
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+.timeline-item:nth-child(odd)::after {
+    right: -10px;
+    left: auto;
+}
+
+.timeline-item:nth-child(even) {
+    left: 52%;
+}
+
+.timeline-item:nth-child(even)::after {
+    left: -10px;
+    right: auto;
+}
+
+/* University and Company Logo Styling */
+.university-logo, .company-logo {
+    width: 80px; /* Adjust size as needed */
+    height: 80px;
+    object-fit: contain; /* Ensures logo fits without cropping */
+    margin-bottom: 15px; /* Space between logo and title */
+    background-color: rgba(255, 255, 255, 0.05); /* Slightly more subtle background for logos */
+    border-radius: 50%; /* Make it round if desired, or keep square for company logos */
+    padding: 5px; /* Padding inside the border-radius */
+    border: 1px solid var(--border-color); /* Lighter border */
+}
+
+.company-logo { /* Specific styles for company logos if needed */
+    border-radius: 10px; /* Example: make company logos slightly rounded squares instead of circles */
+}
+
+
+.timeline-item h3 {
+    font-size: 1.7em;
+    color: var(--primary-accent);
+    margin-bottom: 5px;
+}
+
+.timeline-item p {
+    font-weight: 500;
+    color: var(--text-light);
+    margin-bottom: 5px;
+}
+
+.timeline-date {
+    font-size: 0.9em;
+    color: var(--secondary-text);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.timeline-description {
+    font-size: 1em;
+    color: var(--secondary-text);
+    line-height: 1.8;
+}
+
+.timeline-item ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    padding-top: 5px;
+}
+
+/* Skills Section */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    padding: 30px 0;
+}
+
+.skill-category {
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-category:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.skill-category h3 {
+    color: var(--primary-accent);
+    font-size: 1.6em;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.skill-category h3 i {
+    margin-right: 15px;
+    font-size: 1.2em;
+    color: var(--primary-accent);
+}
+
+.skill-item {
+    margin-bottom: 20px;
+}
+
+.skill-item:last-child {
+    margin-bottom: 0;
+}
+
+.skill-item span {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    color: var(--text-light);
+}
+
+.skill-bar {
+    background-color: var(--border-color);
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-level {
+    height: 100%;
+    background-color: var(--primary-accent);
+    border-radius: 6px;
+    width: 0%;
+    transition: width 1.5s ease-out;
+    position: relative;
+}
+
+/* Contact Section */
+.contact-info {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--secondary-text);
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.contact-links a {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    color: var(--text-light);
+    background-color: var(--card-background);
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-links a i {
+    margin-right: 10px;
+    color: var(--primary-accent);
+    font-size: 1.4em;
+}
+
+.contact-links a:hover {
+    background-color: var(--primary-accent);
+    color: var(--background-dark);
+    transform: translateY(-5px);
+    border-color: var(--primary-accent);
+}
+
+.contact-links a:hover i {
+    color: var(--background-dark);
+}
+
+/* Footer */
+footer {
+    background-color: var(--background-dark);
+    color: var(--secondary-text);
+    text-align: center;
+    padding: 40px 0;
+    font-size: 0.9em;
+    border-top: 5px solid var(--primary-accent);
+    margin-top: auto; /* Footer'ı en alta sabitle */
+    position: relative; /* Z-index'in çalışması için position olması gerekli */
+    z-index: 1; /* Footer içeriğinin diğer elementlerin üzerinde olmasını sağlar */
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-links a {
+    color: var(--secondary-text);
+    font-size: 1.8em;
+    margin: 0 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary-accent);
+    transform: translateY(-5px);
+}
+
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    h1 { font-size: 3.5em; }
+    h2 { font-size: 2.5em; margin-bottom: 40px;}
+    .main-nav a { margin: 0 15px; font-size: 1.1em; padding: 10px 15px; }
+    .timeline-item { width: 47%; padding: 20px; }
+    .timeline-item:nth-child(even) { left: 53%; }
+    .skills-grid { gap: 30px; }
+    /* Adjust scrolling background for smaller screens */
+    .scrolling-bg-icon { height: 100px; margin: 0 40px; }
+    .scrolling-background { animation-duration: 90s; /* Responsive olarak daha yavaş */ }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 2.8em; }
+    .tagline { font-size: 1.5em; }
+    .profile-photo { width: 180px; height: 180px; }
+    .main-nav { flex-direction: column; }
+    .main-nav a { margin: 10px auto; display: block; max-width: 200px; text-align: center; }
+
+    /* Timeline becomes single column */
+    .timeline::before { left: 20px; margin-left: 0; }
+    .timeline-item {
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 15px;
+        text-align: left; /* Metinleri sola hizala */
+        align-items: flex-start; /* İçeriği sola hizala */
+        left: 0 !important; /* Override even/odd positioning */
+        transform: translateX(0);
+    }
+    .timeline-item::after { left: 10px; right: auto; top: 20px; }
+    /* Mobile'da tüm logolar sola hizalı olsun */
+    .timeline-item .university-logo,
+    .timeline-item .company-logo {
+        margin-left: 0; /* Logoyu sola sıfırla */
+        align-self: flex-start; /* Kendini sola hizala (sabit logo pozisyonu için önemli) */
+    }
+
+
+    .skills-grid { grid-template-columns: 1fr; gap: 25px; }
+    .skill-category { padding: 25px; }
+    .skill-category h3 { font-size: 1.4em; }
+    .contact-links { flex-direction: column; }
+    /* Adjust scrolling background for smaller screens */
+    .scrolling-bg-icon { height: 80px; margin: 0 30px; }
+    .scrolling-background { animation-duration: 100s; /* Even slower for mobile */ }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 2.2em; }
+    .tagline { font-size: 1.2em; margin-bottom: 30px; }
+    .profile-photo { width: 150px; height: 150px; }
+    h2 { font-size: 2em; margin-bottom: 30px; }
+    .section { padding: 70px 0; }
+    .timeline-item h3 { font-size: 1.4em; }
+    .skill-category h3 { font-size: 1.3em; }
+    /* Adjust scrolling background for smallest screens */
+    .scrolling-bg-icon { height: 60px; margin: 0 20px; }
+    .scrolling-background { animation-duration: 120s; } /* Daha da yavaş */
+}
