@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling for navigation links and active class update
     const navLinks = document.querySelectorAll('.main-nav a');
     navLinks.forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -8,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                let offset = 0; // Varsayılan offset 0.
+                let offset = 0;
 
                 if (targetId === '#skills') {
                     offset = 140;
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Intersection Observer for section animations (animate-on-scroll)
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     const skillLevels = document.querySelectorAll('.skill-level');
 
@@ -52,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (!entry.target.closest('#skills')) {
                     observer.unobserve(entry.target);
                 }
-            } else { // Bölüm görünürlükten çıktığında barları sıfırla
+            } else {
                 if (entry.target.closest('#skills')) {
                     skillLevels.forEach(bar => {
                         bar.style.width = '0%';
@@ -66,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sectionObserver.observe(element);
     });
 
-    // Scroll-spy for active navigation link
     const sectionsForScrollSpy = document.querySelectorAll('main section');
     const updateActiveNavLink = () => {
         let currentActiveId = '';
