@@ -1,14 +1,13 @@
 /* Genel Stil Ayarları */
 :root {
-    --background-dark: #1a1a1a;        /* Koyu Gri - Ana arka plan */
-    --text-light: #e0e0e0;             /* Açık Gri - Genel metin rengi */
-    --primary-accent: #00bcd4;         /* Turkuaz - Vurgu, ikonlar, ilerleme çubukları */
-    --secondary-text: #a0a0a0;         /* Orta Gri - Açıklama metinleri */
-    --card-background: #2a2a2a;        /* Daha açık koyu gri - Kart ve kutu arka planları */
-    --border-color: #3a3a3a;           /* Hafif kenarlık rengi */
+    --background-dark: #1a1a1a;
+    --text-light: #e0e0e0;
+    --primary-accent: #00bcd4;
+    --secondary-text: #a0a0a0;
+    --card-background: #2a2a2a;
+    --border-color: #3a3a3a;
 }
 
-/* Sıfırlamalar ve Temel Ayarlar */
 * {
     margin: 0;
     padding: 0;
@@ -18,72 +17,67 @@
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
-    color: var(--text-light); /* Tüm metinler için açık gri */
-    background-color: var(--background-dark); /* Tüm arka plan için koyu gri */
+    color: var(--text-light);
+    background-color: var(--background-dark);
     scroll-behavior: smooth;
-    overflow-x: hidden; /* Yatay kaydırmayı engelle */
-    display: flex; /* Flexbox kullanarak ana içeriği ortala */
+    overflow-x: hidden;
+    display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Minimum tam ekran yüksekliği */
+    min-height: 100vh;
 }
 
-/* Scrolling Background Container */
 .scrolling-background {
     position: relative;
     width: 100%;
-    height: 150px; /* Şerit yüksekliğini ayarlayın */
+    height: 150px;
     overflow: hidden;
-    display: flex; /* İçindeki görselleri yanyana sıralamak için */
-    align-items: center; /* Görselleri dikeyde ortala */
-    white-space: nowrap; /* Görsellerin tek satırda kalmasını sağla, satır atlamazlar */
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
 
-    /* Animasyon hızı. Yeni ikon sayısına göre güncellendi. */
-    animation: scrollBackground 90s linear infinite; /* 8 ikon * 4 set = 32 ikonluk bir döngü için uygun hız */
+    animation: scrollBackground 90s linear infinite;
 
     background-color: transparent;
     border-bottom: none;
     box-shadow: none;
 
-    pointer-events: none; /* Fare olaylarını engeller, altındaki içeriğe tıklanabilir */
+    pointer-events: none;
 }
 
 .scrolling-bg-icon {
-    height: 100px; /* Görselin yüksekliği, şerit yüksekliğine göre ayarlayın */
+    height: 100px;
     width: auto;
-    flex-shrink: 0; /* Boyutlarını korumalarını ve küçülmemelerini sağlar */
-    margin: 0 40px; /* Görseller arasında boşluk */
-    /* Görsellerin daha pürüzsüz görünmesi için iyileştirmeler (isteğe bağlı) */
+    flex-shrink: 0;
+    margin: 0 40px;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
 }
 
-/* Keyframe Animation for Scrolling Background */
 @keyframes scrollBackground {
     0% {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(-25%); /* 4 set görsel için %25 kaydır */
+        transform: translateX(-25%);
     }
 }
 
 
-/* Ana İçerik Kapsayıcısı */
 main {
-    flex-grow: 1; /* Ana içeriğin dikeyde yer kaplamasını sağla */
-    position: relative; /* İçeriğin diğer elementlerin üzerinde kalmasını sağlar */
-    z-index: 1; /* Arka plan görsellerinin üzerinde kalmasını sağlar. BU KRİTİK! */
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .container {
     max-width: 1100px;
-    margin: 0 auto; /* Sayfayı ortala */
+    margin: 0 auto;
     padding: 20px;
 }
 
 h1, h2, h3 {
     font-family: 'Inter', sans-serif;
-    color: var(--text-light); /* Başlıklar için açık gri */
+    color: var(--text-light);
     margin-bottom: 20px;
     font-weight: 600;
 }
@@ -97,11 +91,11 @@ h1 {
 
 h2 {
     font-size: 3em;
-    text-align: center; /* Bölüm başlıklarını ortala */
+    text-align: center;
     padding-bottom: 20px;
     position: relative;
     margin-bottom: 60px;
-    color: var(--primary-accent); /* Bölüm başlıkları için turkuaz */
+    color: var(--primary-accent);
 }
 
 h2::after {
@@ -126,7 +120,6 @@ a:hover {
     color: var(--text-light);
 }
 
-/* Animasyonlar (JS tarafından tetiklenecek) */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(50px);
@@ -138,22 +131,20 @@ a:hover {
     transform: translateY(0);
 }
 
-/* Hero Section - İlk sayfa içeriği */
 .hero-section {
     background: linear-gradient(135deg, rgba(0, 102, 153, 0.9), rgba(26, 26, 26, 0.9)), url('image_e0faf0.jpg') no-repeat center center/cover; /* Arka plan görseli yolu düzeltildi */
     background-size: cover;
     height: 100vh;
     display: flex;
-    justify-content: center; /* Yatayda ortala */
-    align-items: center;      /* Dikeyde ortala */
-    text-align: center;      /* Metinleri ortala */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     overflow: hidden;
-    position: relative; /* Z-index'in çalışması için position olması gerekli */
+    position: relative;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-    z-index: 1; /* Hero section'ın diğer içeriğin üzerinde olmasını sağlar */
+    z-index: 1;
 }
 
-/* Hero Section İçindeki Animasyonlar */
 .fade-in-up {
     opacity: 0;
     transform: translateY(20px);
@@ -210,7 +201,6 @@ a:hover {
     font-weight: 400;
 }
 
-/* Main Navigation Menu */
 .main-nav {
     margin-top: 40px;
 }
@@ -250,20 +240,18 @@ a:hover {
     transform: translateY(-5px);
 }
 
-/* Sections */
 .section {
-    padding: 100px 0; /* Bölümlere üst ve alt boşluk */
+    padding: 100px 0;
     background-color: var(--background-dark);
     border-bottom: 1px solid var(--border-color);
-    position: relative; /* İçerik için pozisyon ayarı */
-    z-index: 1; /* Section içeriğinin diğer elementlerin üzerinde olmasını sağlar */
+    position: relative;
+    z-index: 1;
 }
 
 .section:nth-child(even) {
     background-color: var(--card-background);
 }
 
-/* Timeline (Education & Experience) */
 .timeline {
     position: relative;
     max-width: 900px;
@@ -294,9 +282,8 @@ a:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    /* Logoların ve metinlerin hizalaması için */
-    align-items: flex-start; /* Öğe içeriğini sola hizala */
-    text-align: left; /* Metinleri sola hizala */
+    align-items: flex-start;
+    text-align: left;
 }
 
 .timeline-item:hover {
@@ -316,7 +303,6 @@ a:hover {
     z-index: 1;
 }
 
-/* Positioning for left/right timeline items */
 .timeline-item:nth-child(odd) {
     left: 0;
 }
@@ -335,20 +321,19 @@ a:hover {
     right: auto;
 }
 
-/* University and Company Logo Styling */
 .university-logo, .company-logo {
-    width: 80px; /* Adjust size as needed */
+    width: 80px;
     height: 80px;
-    object-fit: contain; /* Ensures logo fits without cropping */
-    margin-bottom: 15px; /* Space between logo and title */
-    background-color: rgba(255, 255, 255, 0.05); /* Slightly more subtle background for logos */
-    border-radius: 50%; /* Make it round if desired, or keep square for company logos */
-    padding: 5px; /* Padding inside the border-radius */
-    border: 1px solid var(--border-color); /* Lighter border */
+    object-fit: contain;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    padding: 5px;
+    border: 1px solid var(--border-color);
 }
 
-.company-logo { /* Specific styles for company logos if needed */
-    border-radius: 10px; /* Example: make company logos slightly rounded squares instead of circles */
+.company-logo {
+    border-radius: 10px;
 }
 
 
@@ -383,7 +368,6 @@ a:hover {
     padding-top: 5px;
 }
 
-/* Skills Section */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -451,7 +435,6 @@ a:hover {
     position: relative;
 }
 
-/* Contact Section */
 .contact-info {
     font-size: 1.1em;
     margin-bottom: 30px;
@@ -495,7 +478,6 @@ a:hover {
     color: var(--background-dark);
 }
 
-/* Footer */
 footer {
     background-color: var(--background-dark);
     color: var(--secondary-text);
@@ -503,9 +485,9 @@ footer {
     padding: 40px 0;
     font-size: 0.9em;
     border-top: 5px solid var(--primary-accent);
-    margin-top: auto; /* Footer'ı en alta sabitle */
-    position: relative; /* Z-index'in çalışması için position olması gerekli */
-    z-index: 1; /* Footer içeriğinin diğer elementlerin üzerinde olmasını sağlar */
+    margin-top: auto;
+    position: relative;
+    z-index: 1;
 }
 
 .social-links {
@@ -525,7 +507,6 @@ footer {
 }
 
 
-/* Responsive Design */
 @media (max-width: 992px) {
     h1 { font-size: 3.5em; }
     h2 { font-size: 2.5em; margin-bottom: 40px;}
@@ -533,9 +514,8 @@ footer {
     .timeline-item { width: 47%; padding: 20px; }
     .timeline-item:nth-child(even) { left: 53%; }
     .skills-grid { gap: 30px; }
-    /* Adjust scrolling background for smaller screens */
     .scrolling-bg-icon { height: 100px; margin: 0 40px; }
-    .scrolling-background { animation-duration: 90s; /* Responsive olarak daha yavaş */ }
+    .scrolling-background { animation-duration: 90s;}
 }
 
 @media (max-width: 768px) {
@@ -545,23 +525,21 @@ footer {
     .main-nav { flex-direction: column; }
     .main-nav a { margin: 10px auto; display: block; max-width: 200px; text-align: center; }
 
-    /* Timeline becomes single column */
     .timeline::before { left: 20px; margin-left: 0; }
     .timeline-item {
         width: 100%;
         padding-left: 60px;
         padding-right: 15px;
-        text-align: left; /* Metinleri sola hizala */
-        align-items: flex-start; /* İçeriği sola hizala */
-        left: 0 !important; /* Override even/odd positioning */
+        text-align: left;
+        align-items: flex-start;
+        left: 0 !important;
         transform: translateX(0);
     }
     .timeline-item::after { left: 10px; right: auto; top: 20px; }
-    /* Mobile'da tüm logolar sola hizalı olsun */
     .timeline-item .university-logo,
     .timeline-item .company-logo {
-        margin-left: 0; /* Logoyu sola sıfırla */
-        align-self: flex-start; /* Kendini sola hizala (sabit logo pozisyonu için önemli) */
+        margin-left: 0;
+        align-self: flex-start;
     }
 
 
@@ -569,9 +547,8 @@ footer {
     .skill-category { padding: 25px; }
     .skill-category h3 { font-size: 1.4em; }
     .contact-links { flex-direction: column; }
-    /* Adjust scrolling background for smaller screens */
     .scrolling-bg-icon { height: 80px; margin: 0 30px; }
-    .scrolling-background { animation-duration: 100s; /* Even slower for mobile */ }
+    .scrolling-background { animation-duration: 100s;}
 }
 
 @media (max-width: 480px) {
@@ -582,7 +559,6 @@ footer {
     .section { padding: 70px 0; }
     .timeline-item h3 { font-size: 1.4em; }
     .skill-category h3 { font-size: 1.3em; }
-    /* Adjust scrolling background for smallest screens */
     .scrolling-bg-icon { height: 60px; margin: 0 20px; }
-    .scrolling-background { animation-duration: 120s; } /* Daha da yavaş */
+    .scrolling-background { animation-duration: 120s; }
 }
